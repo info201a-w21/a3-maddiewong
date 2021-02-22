@@ -153,13 +153,14 @@ plot(continuous_chart) # Plot continuous_chart
 # data is present/absent
 
 # Load in data for state codes 
-state_codes <- read.delim("https://www2.census.gov/geo/docs/reference/state.txt")
+state_codes <- read.csv("https://raw.githubusercontent.com/info201a-w21/a3-maddiewong/main/state_codes.csv?token=ASLHHCLZ72QZ67HUUNCQG73AHVJPG")
 
 # Mutate incarceration data for map chart using data from 1994-2003 to see changes in 
 # incarceration populations 
 maps_data <- Incarceration_Trends %>%
   group_by(year) %>%
   filter(year > 1993 && year <= 2003) %>%
+  # Add in mutate() function
   select(year, state, county_name, total_pop_15to64)
   
 # Define a minimalist theme 
@@ -173,10 +174,16 @@ map_theme <- theme_bw() +
   )
 
 # Load in shape of states 
-map_shape <- map_data("usa")
+map_shape <- map_data("state") %>%
+  left_join(maps_data, by = "region")
 
 # Create a blank map of states 
-map_chart <- ggplot()
+map_chart <- ggplot(map_shape) %>%
+  geom_polygon(
+    mapping = aes(x = long, y = lat, group = group, fill = total_pop_15to64),
+    color = "blue",
+    size = .1
+  )
 
 
 
