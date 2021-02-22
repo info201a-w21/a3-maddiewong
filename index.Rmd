@@ -3,9 +3,42 @@ title: "index.Rmd"
 output: html_document
 ---
 
+```{r source, include=FALSE}
+source(analysis.R)
+```
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+# Introduction & Summary Information 
+For my analysis of the Incarceration Trends data, I decided to focus on how differences in 
+race and gender in the national incarcerated population were affected by the Violent Crime
+Control and Law Enforcement Act, or the 1994 Crime Bill, which was imposed by the Clinton
+Administration. My analysis file mainly focuses on differences in the amount of male vs.
+female inmates who were incarcerated as well as the proportions of total inmates before and 
+after the 1994 Crime Bill. Additionally, I decided to calculate changes in the number of 
+Black inmates before and after 1994. I believe that an analysis of this data can provide
+insights on information regarding the differences between the incarceration of People of 
+Color compared to caucasian populations. Furthermore, my interest in the effects of the 
+War on Drugs and War on Crime motivated me to look at incarceration rates specifically from
+this time period. 
+
+\
+
+# Summary information 
+\
+#```{r summary, echo = FALSE}
+
+#summary_info
+
+#```
+
+# Trends over time chart 
+
+# Variable comparison chart 
+
+# Map 
 
 ## R Markdown
 
@@ -13,9 +46,6 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
-```{r cars}
-summary(cars)
-```
 
 ## Including Plots
 

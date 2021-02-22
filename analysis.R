@@ -60,13 +60,13 @@ total_1995 <- Incarceration_Trends %>%
 # Calculate proportion of 1993 inmates / 1995 inmates to see the difference after 1994 Crime Bill
 prop_1993_1994 <- (total_1993 / total_1995)
 
-# What is the county with the most black inmates ages 15 to 64 in 1995?
+# What is the county with the most Black inmates ages 15 to 64 in 1995?
 county_most_black_inmates <- Incarceration_Trends %>%
   filter(year == 1995) %>%
   summarize(black_pop_15to64 = max(black_pop_15to64)) %>%
   pull(county_name)
 
-# What is the county with the least black inmates ages 15 to 64 in 1995?
+# What is the county with the least Black inmates ages 15 to 64 in 1995?
 county_least_black_inmates <- Incarceration_Trends %>%
   filter(year == 1995) %>%
   summarize(black_pop_15to64 = min(black_pop_15to64)) %>%
