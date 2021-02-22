@@ -32,18 +32,16 @@ num_counties <- Incarceration_Trends %>%
 
 # What is the average amount of female inmates in 1995?
 avg_female_1995 <- Incarceration_Trends %>%
-  group_by(county_name) %>%
   filter(year == 1995) %>%
   summarize(female_pop_15to64 = sum(female_pop_15to64)) %>%
-  summarize(avg_female_1995 = female_pop_15to64 / num_counties) %>%
-  pull(avg_female_1995) 
+  summarize(avg_female_1995 = round(female_pop_15to64 / num_counties)) %>%
+  pull(avg_female_1995)  
 
 # What is the average amount of male inmates in 1995?
 avg_male_1995 <- Incarceration_Trends %>%
-  group_by(county_name) %>%
   filter(year == 1995) %>%
   summarize(male_pop_15to64 = sum(male_pop_15to64)) %>%
-  summarize(avg_male_1995 = male_pop_15to64 / num_counties) %>%
+  summarize(avg_male_1995 = round(male_pop_15to64 / num_counties)) %>%
   pull(avg_male_1995)
 
 # What is the proportion of total inmates from 1993 compared to 1995 after the 1994 Crime Bill?
@@ -62,19 +60,17 @@ total_1995 <- Incarceration_Trends %>%
 # Calculate proportion of 1993 inmates / 1995 inmates to see the difference after 1994 Crime Bill
 prop_1993_1994 <- (total_1993 / total_1995)
 
-# What is the county with the most black inmates in 1995?
+# What is the county with the most black inmates ages 15 to 64 in 1995?
 county_most_black_inmates <- Incarceration_Trends %>%
-  group_by(year) %>%
   filter(year == 1995) %>%
   summarize(black_pop_15to64 = max(black_pop_15to64)) %>%
   pull(county_name)
 
-# What is the county with the least black inmates in 1995?
+# What is the county with the least black inmates ages 15 to 64 in 1995?
 county_least_black_inmates <- Incarceration_Trends %>%
-  group_by(year) %>%
   filter(year == 1995) %>%
   summarize(black_pop_15to64 = min(black_pop_15to64)) %>%
-  pull(county_name)
+  select(county_name)
 
 # What was the highest overall incarcerated population before 1994?
 highest_pre1994 <- Incarceration_Trends %>%
@@ -98,6 +94,14 @@ change_in_total_pop <- (highest_post1994 - highest_pre1994)
 # top 10 counties in a state, top 10 states, etc.)
 # Must have clear x/y labels, a clear title, and a clear legend with different line colors
 
+# Bar chart displaying the changes in the amount of Black inmates from 1993 to 2003 in California
+# to show changes after the implementation of the 1994 Crime Bill 
+Incarceration_Trends %>%
+  filter(year >= 1993 && year <= 2003) %>%
+ggplot(Incarceration_Trends, mapping = aes(x = year, y = black_pop_15to64)) +
+  geom_bar() +
+  labs(x = "Year", y = "Number of Black Inmates", 
+    title = "Population of Black Inmates in California Jails from 1993 to 2003")
 
 # Make a chart that compares two continuous variables to one another. Think carefully
 # about what such a comparison means, and want to communicate to your user (you may have to find 
