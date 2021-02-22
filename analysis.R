@@ -97,12 +97,21 @@ summary_info$change_in_total_pop <- (highest_post1994 - highest_pre1994)
 # top 10 counties in a state, top 10 states, etc.)
 # Must have clear x/y labels, a clear title, and a clear legend with different line colors
 
-# Trends bar chart displaying the changes in the amount of Black inmates from 1993 to 2003 in California
-# to show changes after the implementation of the 1994 Crime Bill 
-trends_chart <- Incarceration_Trends %>% 
-  filter(year >= 1993 && year <= 2003) %>% 
-ggplot(Incarceration_Trends, mapping = aes(x = year, y = black_pop_15to64)) +
-  geom_bar() +
+# Mutate incarceration data to narrow down for trends chart 
+trends_data <- Incarceration_Trends %>%
+  group_by(year) %>%
+  filter(state == "CA") %>%
+  filter(year > 1993 && year <= 2003) %>%
+  mutate(county_total = sum(black_pop_15to64)) %>%
+  select(year, state, county_name, black_pop_15to64) 
+
+# Aggregate the trends data frame to consolidate totals by year 
+trends_totals <- aggregate(trends_data['black_pop_15to64'], by = trends_data['year'], sum)
+  
+# Make a trends bar chart displaying the changes in the amount of Black inmates from 1994 to 2003 
+# in California to show changes after the implementation of the 1994 Crime Bill 
+trends_chart <- ggplot(data = trends_totals) +
+  geom_bar(mapping = aes(x = year, y = black_pop_15to64)) +
   labs(x = "Year", y = "Number of Black Inmates", 
     title = "Population of Black Inmates in California Jails from 1993 to 2003")  
 
@@ -111,6 +120,12 @@ ggplot(Incarceration_Trends, mapping = aes(x = year, y = black_pop_15to64)) +
 # relevant trends in the dataset first!)
 # Must have clear x/y labels, clear title, if you choose to add color encoding (not required), you
 # need a legend for your different color and a clear legend title 
+
+# Mutate incarceration data to reflect data for continuous chart 
+
+# Aggregate the continuous data frame to consolidate by year
+
+# Create a chart to compare the populations of black vs. white inmates from 1994 to 2003 
 Incarceration_Trends %>%
   filter(year >= 1993 && year <= 2003) 
   ggplot(Incarceration_Trends, mapping = aes(x = year)) +
