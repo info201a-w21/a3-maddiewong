@@ -113,10 +113,9 @@ trends_totals <- aggregate(trends_data['black_pop_15to64'], by = trends_data['ye
 trends_chart <- ggplot(data = trends_totals) +
   geom_bar(mapping = aes(x = year, y = black_pop_15to64), stat = "count") +
   labs(x = "Year", y = "Number of Black Inmates", 
-    title = "Population of Black Inmates in California Jails from 1993 to 2003") +
-  theme_minimal()
+    title = "Population of Black Inmates in California Jails from 1993 to 2003")
 
-plot(trends_chart)
+plot(trends_chart) # Plot trends_chart 
 
 # Make a chart that compares two continuous variables to one another. Think carefully
 # about what such a comparison means, and want to communicate to your user (you may have to find 
@@ -140,23 +139,41 @@ black_inmate_total <- aggregate(continuous_data['black_pop_15to64'], by = trends
 # Create a chart to compare the populations of black vs. white inmates from 1994 to 2003 
 continuous_chart <- ggplot() +
   geom_line(data = white_inmate_total, aes(x = year, y = white_pop_15to64), color = "blue") +
-  labs(x = "Year", y = "Number of White Inmates") +
+  labs(x = "Year", y = "Number of Inmates") +
   geom_line(data = black_inmate_total, aes(x = year, y = black_pop_15to64), color = "yellow") +
-  labs(x = "Year", y = "Number of Black Inmates")
+  labs(x = "Year", y = "Number of  Inmates")
+
+plot(continuous_chart) # Plot continuous_chart 
 
 # Make a map that shows how your measure of interests varies/is distributed  geographically.
 # Think carefully about what such a comparison means, and want to communicate to your user
 # Must have a title, color scale needs a legend with a clear label
 # Use a map based coordinate system to set the aspect ratio of your map (see reading) 
 # Use a minimalist theme for the map and cross-reference their visual tool to check how much
-# data is present/absent 
+# data is present/absent
+
+# Load in data for state codes 
+state_codes <- read.delim("https://www2.census.gov/geo/docs/reference/state.txt")
+
+# Mutate incarceration data for map chart using data from 1994-2003 to see changes in 
+# incarceration populations 
+maps_data <- Incarceration_Trends %>%
+  group_by(year) %>%
+  filter(year > 1993 && year <= 2003) %>%
+  select(year, state, county_name, total_pop_15to64)
   
 # Define a minimalist theme 
 map_theme <- theme_bw() +
-  theme()
+  theme(
+    axis.line = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(), 
+    axis.title = element_blank(),
+    plot.background = element_blank()
+  )
 
 # Load in shape of states 
-map_shape <- map_data()
+map_shape <- map_data("usa")
 
 # Create a blank map of states 
 map_chart <- ggplot()
