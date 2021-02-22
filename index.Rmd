@@ -24,27 +24,32 @@ Color compared to caucasian populations. Furthermore, my interest in the effects
 War on Drugs and War on Crime motivated me to look at incarceration rates specifically from
 this time period. 
 
+```{r}
+
+```
+
 \
 
 # Summary information 
 \
 #```{r summary, echo = FALSE}
-
 #summary_info
-
 #```
 
 # Trends over time chart 
+#```{r time, echo = FALSE}
+#trends_chart 
+#```
 
 # Variable comparison chart 
+#```{r variable, echo = FALSE}
+#variable_chart
+#```
 
 # Map 
-
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+#```{r map, echo = FALSE}
+#map_chart 
+#```
 
 
 ## Including Plots

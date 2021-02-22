@@ -23,22 +23,25 @@ Jail_Jurisdiction <- read.csv("https://raw.githubusercontent.com/vera-institute/
 # varying numbers of incarcerated populations to look at the different trends later on 
 # specifically relating to the years after the introduction of the 1994 Crime Bill 
 
+# Function that returns a list of summary information statistics 
+summary_info <- list()
+
 # Calculate the total number of counties in Incarceration_Trends 
-num_counties <- Incarceration_Trends %>%
+summary_info$num_counties <- Incarceration_Trends %>%
   group_by(county_name) %>%
   summarize(num_counties = length(unique(county_name))) %>%
   summarize(num_counties = sum(num_counties)) %>%
   pull(num_counties) 
 
 # What is the average amount of female inmates in 1995?
-avg_female_1995 <- Incarceration_Trends %>%
+summary_info$avg_female_1995 <- Incarceration_Trends %>%
   filter(year == 1995) %>%
   summarize(female_pop_15to64 = sum(female_pop_15to64)) %>%
   summarize(avg_female_1995 = round(female_pop_15to64 / num_counties)) %>%
   pull(avg_female_1995)  
 
 # What is the average amount of male inmates in 1995?
-avg_male_1995 <- Incarceration_Trends %>%
+summary_info$avg_male_1995 <- Incarceration_Trends %>%
   filter(year == 1995) %>%
   summarize(male_pop_15to64 = sum(male_pop_15to64)) %>%
   summarize(avg_male_1995 = round(male_pop_15to64 / num_counties)) %>%
@@ -46,46 +49,46 @@ avg_male_1995 <- Incarceration_Trends %>%
 
 # What is the proportion of total inmates from 1993 compared to 1995 after the 1994 Crime Bill?
 # Calculate total inmate population in 1993 
-total_1993 <- Incarceration_Trends %>%
+summary_info$total_1993 <- Incarceration_Trends %>%
   filter(year == 1993) %>%
   summarize(total_pop = sum(total_pop)) %>%
   pull(total_pop)
 
 # Calculate total inmate population in 1995 
-total_1995 <- Incarceration_Trends %>%
+summary_info$total_1995 <- Incarceration_Trends %>%
   filter(year == 1995) %>%
   summarize(total_pop = sum(total_pop)) %>%
   pull(total_pop)
 
 # Calculate proportion of 1993 inmates / 1995 inmates to see the difference after 1994 Crime Bill
-prop_1993_1994 <- (total_1993 / total_1995)
+summary_info$prop_1993_1995 <- (total_1993 / total_1995)
 
 # What is the county with the most Black inmates ages 15 to 64 in 1995?
-county_most_black_inmates <- Incarceration_Trends %>%
+summary_info$county_most_black_inmates <- Incarceration_Trends %>%
   filter(year == 1995) %>%
   summarize(black_pop_15to64 = max(black_pop_15to64)) %>%
   pull(county_name)
 
 # What is the county with the least Black inmates ages 15 to 64 in 1995?
-county_least_black_inmates <- Incarceration_Trends %>%
+summary_info$county_least_black_inmates <- Incarceration_Trends %>%
   filter(year == 1995) %>%
   summarize(black_pop_15to64 = min(black_pop_15to64)) %>%
   select(county_name)
 
 # What was the highest overall incarcerated population before 1994?
-highest_pre1994 <- Incarceration_Trends %>%
+summary_info$highest_pre1994 <- Incarceration_Trends %>%
   filter(year < 1994) %>%
   summarize(total_pop = max(total_pop)) %>%
   pull(total_pop)
 
 # What was the highest overall incarcerated population after 1994? 
-highest_post1994 <- Incarceration_Trends %>%
+summary_info$highest_post1994 <- Incarceration_Trends %>%
   filter(year > 1994) %>%
   summarize(total_pop = max(total_pop)) %>%
   pull(total_pop)
 
 # How much did the highest incarcerated population total change after 1994? 
-change_in_total_pop <- (highest_post1994 - highest_pre1994)
+summary_info$change_in_total_pop <- (highest_post1994 - highest_pre1994)
 
 # Make a chart that shows trends over time for a variable of your choice 
 # Show more than one but fewer than 10 lines. Your graph should compare the trend
@@ -94,9 +97,9 @@ change_in_total_pop <- (highest_post1994 - highest_pre1994)
 # top 10 counties in a state, top 10 states, etc.)
 # Must have clear x/y labels, a clear title, and a clear legend with different line colors
 
-# Bar chart displaying the changes in the amount of Black inmates from 1993 to 2003 in California
+# Trends bar chart displaying the changes in the amount of Black inmates from 1993 to 2003 in California
 # to show changes after the implementation of the 1994 Crime Bill 
-Incarceration_Trends %>% 
+trends_chart <- Incarceration_Trends %>% 
   filter(year >= 1993 && year <= 2003) %>% 
 ggplot(Incarceration_Trends, mapping = aes(x = year, y = black_pop_15to64)) +
   geom_bar() +
@@ -121,7 +124,14 @@ Incarceration_Trends %>%
 # Use a map based coordinate system to set the aspect ratio of your map (see reading) 
 # Use a minimalist theme for the map and cross-reference their visual tool to check how much
 # data is present/absent 
+  
+# Define a minimalist theme 
+map_theme <- theme_bw() +
+  theme()
 
+# Load in shape of states 
+
+# Create a blank map of states 
 
 
 
