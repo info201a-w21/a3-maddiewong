@@ -96,19 +96,23 @@ change_in_total_pop <- (highest_post1994 - highest_pre1994)
 
 # Bar chart displaying the changes in the amount of Black inmates from 1993 to 2003 in California
 # to show changes after the implementation of the 1994 Crime Bill 
-Incarceration_Trends %>%
-  filter(year >= 1993 && year <= 2003) %>%
+Incarceration_Trends %>% 
+  filter(year >= 1993 && year <= 2003) %>% 
 ggplot(Incarceration_Trends, mapping = aes(x = year, y = black_pop_15to64)) +
   geom_bar() +
   labs(x = "Year", y = "Number of Black Inmates", 
-    title = "Population of Black Inmates in California Jails from 1993 to 2003")
+    title = "Population of Black Inmates in California Jails from 1993 to 2003")  
 
 # Make a chart that compares two continuous variables to one another. Think carefully
 # about what such a comparison means, and want to communicate to your user (you may have to find 
 # relevant trends in the dataset first!)
 # Must have clear x/y labels, clear title, if you choose to add color encoding (not required), you
 # need a legend for your different color and a clear legend title 
-
+Incarceration_Trends %>%
+  filter(year >= 1993 && year <= 2003) 
+  ggplot(Incarceration_Trends, mapping = aes(x = year)) +
+  geom_line(aes(y = black_pop_15to64), color = "blue") +
+  geom_line(aes(y = white_pop_15to64), color = "yellow")
 
 
 # Make a map that shows how your measure of interests varies/is distributed  geographically.
