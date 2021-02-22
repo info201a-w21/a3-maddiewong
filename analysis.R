@@ -7,6 +7,7 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 library(stringr)
+library(mapproj)
 
 # Load in incarceration_trends.csv & Jail Jurisdiction data 
 # Beware of missing values: You don't need to worry about "imputing" these, but
@@ -110,9 +111,12 @@ trends_totals <- aggregate(trends_data['black_pop_15to64'], by = trends_data['ye
 # Make a trends bar chart displaying the changes in the amount of Black inmates from 1994 to 2003 
 # in California to show changes after the implementation of the 1994 Crime Bill 
 trends_chart <- ggplot(data = trends_totals) +
-  geom_bar(mapping = aes(x = year, y = black_pop_15to64)) +
+  geom_bar(mapping = aes(x = year, y = black_pop_15to64), stat = "count") +
   labs(x = "Year", y = "Number of Black Inmates", 
-    title = "Population of Black Inmates in California Jails from 1993 to 2003")  
+    title = "Population of Black Inmates in California Jails from 1993 to 2003") +
+  theme_minimal()
+
+plot(trends_chart)
 
 # Make a chart that compares two continuous variables to one another. Think carefully
 # about what such a comparison means, and want to communicate to your user (you may have to find 
@@ -152,8 +156,10 @@ map_theme <- theme_bw() +
   theme()
 
 # Load in shape of states 
+map_shape <- map_data()
 
 # Create a blank map of states 
+map_chart <- ggplot()
 
 
 
