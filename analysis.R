@@ -1,6 +1,6 @@
 # Assignment 3: Data Visualization (incarceration) 
 # Create an analysis.R file to analyze dataframe and think about how the
-# measures of incarceration vary by race 
+# measures of incarceration vary by race and year 
 
 # Load in necessary packages to work with data 
 library(dplyr)
@@ -76,9 +76,20 @@ county_least_black_inmates <- Incarceration_Trends %>%
   summarize(black_pop_15to64 = min(black_pop_15to64)) %>%
   pull(county_name)
 
-# What year and total was the highest overall incarcerated population before 1994?
+# What was the highest overall incarcerated population before 1994?
+highest_pre1994 <- Incarceration_Trends %>%
+  filter(year < 1994) %>%
+  summarize(total_pop = max(total_pop)) %>%
+  pull(total_pop)
 
-# What year and total was the highest overall incarcerated population after 1994? 
+# What was the highest overall incarcerated population after 1994? 
+highest_post1994 <- Incarceration_Trends %>%
+  filter(year > 1994) %>%
+  summarize(total_pop = max(total_pop)) %>%
+  pull(total_pop)
+
+# How much did the highest incarcerated population total change after 1994? 
+change_in_total_pop <- (highest_post1994 - highest_pre1994)
 
 # Make a chart that shows trends over time for a variable of your choice 
 # Show more than one but fewer than 10 lines. Your graph should compare the trend
