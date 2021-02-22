@@ -43,7 +43,7 @@ this time period.
 
 # Variable comparison chart 
 #```{r variable, echo = FALSE}
-#variable_chart
+#continuous_chart
 #```
 
 # Map 

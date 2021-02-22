@@ -102,7 +102,6 @@ trends_data <- Incarceration_Trends %>%
   group_by(year) %>%
   filter(state == "CA") %>%
   filter(year > 1993 && year <= 2003) %>%
-  mutate(county_total = sum(black_pop_15to64)) %>%
   select(year, state, county_name, black_pop_15to64) 
 
 # Aggregate the trends data frame to consolidate totals by year 
@@ -122,16 +121,24 @@ trends_chart <- ggplot(data = trends_totals) +
 # need a legend for your different color and a clear legend title 
 
 # Mutate incarceration data to reflect data for continuous chart 
+continuous_data <- Incarceration_Trends %>%
+  group_by(year) %>%
+  filter(state == "CA") %>%
+  filter(year > 1993 && year <= 2003) %>%
+  select(year, state, county_name, black_pop_15to64, white_pop_15to64) 
 
-# Aggregate the continuous data frame to consolidate by year
+# Aggregate the data for total white inmate population 
+white_inmate_total <- aggregate(continuous_data['white_pop_15to64'], by = trends_data['year'], sum)
+
+# Aggregate the data for total black inmate population 
+black_inmate_total <- aggregate(continuous_data['black_pop_15to64'], by = trends_data['year'], sum)
 
 # Create a chart to compare the populations of black vs. white inmates from 1994 to 2003 
-Incarceration_Trends %>%
-  filter(year >= 1993 && year <= 2003) 
-  ggplot(Incarceration_Trends, mapping = aes(x = year)) +
-  geom_line(aes(y = black_pop_15to64), color = "blue") +
-  geom_line(aes(y = white_pop_15to64), color = "yellow")
-
+continuous_chart <- ggplot() +
+  geom_line(data = white_inmate_total, aes(x = year, y = white_pop_15to64), color = "blue") +
+  labs(x = "Year", y = "Number of White Inmates") +
+  geom_line(data = black_inmate_total, aes(x = year, y = black_pop_15to64), color = "yellow") +
+  labs(x = "Year", y = "Number of Black Inmates")
 
 # Make a map that shows how your measure of interests varies/is distributed  geographically.
 # Think carefully about what such a comparison means, and want to communicate to your user
