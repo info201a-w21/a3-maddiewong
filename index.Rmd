@@ -4,7 +4,7 @@ output: html_document
 ---
 
 ```{r source, include=FALSE}
-source(analysis.R)
+source("analysis.R")
 ```
 
 ```{r setup, include=FALSE}
@@ -32,19 +32,19 @@ this time period.
 
 # Summary information 
 \
-#```{r summary, echo = FALSE}
-#summary_info
-#```
+```{r summary, echo = FALSE}
+summary_info
+```
 
 # Trends over time chart 
-#```{r time, echo = FALSE}
-#trends_chart 
-#```
+```{r time, echo = FALSE}
+trends_chart 
+```
 
 # Variable comparison chart 
-#```{r variable, echo = FALSE}
-#continuous_chart
-#```
+```{r variable, echo = FALSE}
+continuous_chart
+```
 
 # Map 
 #```{r map, echo = FALSE}
