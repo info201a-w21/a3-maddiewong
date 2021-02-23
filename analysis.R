@@ -118,10 +118,10 @@ continuous_data <- Incarceration_Trends %>%
   select(year, state, county_name, poc_pop, white_pop_15to64) 
 
 # Aggregate the data for total POC inmate population per year 
-white_inmate_total <- aggregate(continuous_data['white_pop_15to64'], by = trends_data['year'], sum)
+white_inmate_total <- aggregate(continuous_data['white_pop_15to64'], by = continuous_data['year'], sum)
 
 # Aggregate the data for total black POC population per year
-poc_inmate_total <- aggregate(continuous_data['poc_pop'], by = trends_data['year'], sum)
+poc_inmate_total <- aggregate(continuous_data['poc_pop'], by = continuous_data['year'], sum)
 
 # Join inmate totals 
 inmate_total_pop <- left_join(white_inmate_total, poc_inmate_total, by = "year")
@@ -144,15 +144,21 @@ plot(continuous_chart) # Plot continuous_chart
 # Load in data for state codes 
 state_codes <- read.csv("https://raw.githubusercontent.com/info201a-w21/a3-maddiewong/main/state_codes.csv?token=ASLHHCLZ72QZ67HUUNCQG73AHVJPG")
 
-# Mutate incarceration data for map chart using data from 1994-2003 to see changes in 
+# Mutate incarceration data for map chart using data from 1995 to see changes in 
 # incarceration populations 
 maps_data <- Incarceration_Trends %>%
   group_by(year) %>%
-  filter(year > 1993 && year <= 2003) %>%
-  select(year, Code = state, county_name, total_pop_15to64)
+  filter(year == 1995) %>%
+  select(year, Code = state, total_pop_15to64)
+
+# Aggregate data for total inmates for each state  
+maps_totals <- aggregate(maps_data['total_pop_15to64'], by = maps_data['Code'], sum) 
+
+# Join map data and totals by state code 
+join_maps_totals <- left_join(maps_totals, maps_data, by = "Code")
 
 # Join maps_data and state codes 
-join_map_codes <- left_join(maps_data, state_codes, by = "Code") %>%
+join_map_codes <- left_join(maps_totals, state_codes, by = "Code") %>%
   mutate(region = tolower(State)) # Mutate state to lower to combine w/ map shape later 
   
 # Define a minimalist theme 
@@ -183,9 +189,9 @@ map_shape <- map_data("state") %>%
 #  coord_map() +
 #  scale_fill_continuous(limits = c(0, max(map_shape$total_pop_15to64)), 
 #                        low = "aliceblue", high = "steelblue4"
-##=  ) +
+#  ) +
 #  map_theme +
-#  ggtitle("Differences in Jail Populations Across the U.S. (1994-2003)")
+#  ggtitle("Differences in Jail Populations Across the U.S. (1994-2003)") 
 
 #plot(map_chart) # Plot map_chart 
 
