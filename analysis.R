@@ -133,7 +133,8 @@ inmate_total_pop <- left_join(white_inmate_total, poc_inmate_total, by = "year")
 # Create a chart to compare the populations of black vs. white inmates in California from 1994 to 2003 
 continuous_chart <- ggplot(data = inmate_total_pop) +
   geom_point(mapping = aes(x = white_pop_15to64, y = poc_pop), color = "blue") +
-  labs(x = "Number of White Inmates", y = "Number of POC Inmates") 
+  labs(x = "Number of White Inmates", y = "Number of POC Inmates", 
+       title = "Comparing Jail Populations of POC and White Inmates in California (1994-2003)") 
 
 plot(continuous_chart) # Plot continuous_chart 
 

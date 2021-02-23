@@ -1,5 +1,5 @@
 ---
-title: "index.Rmd"
+title: "Changes in U.S. Incarcerated Populations after the 1994 Crime Bill"
 output: html_document
 ---
 
@@ -35,29 +35,49 @@ this time period.
 ```{r summary, echo = FALSE}
 summary_info
 ```
+My summary information consists of the different values between black and white incarcerated 
+individuals. Since I am focusing on the analysis of increases in inmate population totals 
+after the 1994 Crime Bill, I thought it would be interesting to calculate the average amount
+of individuals by both gender and race after 1994. I learned that the average amount of female
+inmates after 1994 was 46,688 women while the average amount of men was 46,179. Additionally, 
+I calculated the proportion of total inmates from 1993 compared to 1995 which came out to be 
+.976 demonstrating that there was about a .03 increase in the inmate population over the two
+years after the crime bill was introduced. Finally, I calculated the difference between the 
+highest number of inmates that existed before 1994 and after 1994 which came out to be 
+9,100,159 before 1994 and 10,120,540 inmates after. I calculated the total difference between
+these totals which came out to be 1,020,381 people. 
+\
 
 # Trends over time chart 
+\
 ```{r time, echo = FALSE}
 trends_chart 
 ```
-
+This chart reflects the changes in the total population of Black inmates after the 1994 Crime Bill
+in California. I decided to include this chart in order to see the changes in the Black inmate
+population after the imposition of certain policies that resulted after the 1994 bill which increased
+racial discrimination through the War on Drugs and the War on Crime. This chart displays a pattern 
+that shows the population of Black inmates increasing substantially after 1994 as it increases 
+about 1 million people after the bill. 
+\
 # Variable comparison chart 
+\
 ```{r variable, echo = FALSE}
 continuous_chart
 ```
-
+This chart compares the amount of people of color inmates to white inmates in California prisons after
+1994. While there appears to be more white inmates than POC, the amount of POC inmates to white inmates 
+should be expected to be proportional to the racial demographics of the state. This data shows that the 
+amount of POC who are incarcerated compared to white people increased over the years and can be analyzed
+by taking into account that caucasian/non-POC people make up about 60% of the CA population while Black,
+Latinx, and Native communities make up about 25% (subtracting the 15% of Asian people that make up
+the CA racial demographics because they are not accounted for in the Incarceration dataset). As the years
+progress, POC appear to make up more than 25% of the total jail population demographic demonstrating 
+disparities in incarceration rates for POC vs white inmates. 
+\
 # Map 
+\
 #```{r map, echo = FALSE}
 #map_chart 
 #```
 
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
