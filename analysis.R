@@ -14,11 +14,9 @@ library(mapproj)
 # when choosing what to visualize, you will want to focus on a particular
 # location and/or year that has sufficient data (note, this varies across variables)
 
-Incarceration_Trends <- read.csv("https://raw.githubusercontent.com/vera-institute/
-                                 incarceration-trends/master/incarceration_trends.csv")
+Incarceration_Trends <- read.csv("https://raw.githubusercontent.com/vera-institute/incarceration-trends/master/incarceration_trends.csv")
 
-Jail_Jurisdiction <- read.csv("https://raw.githubusercontent.com/vera-institute/
-                        incarceration-trends/master/incarceration_trends_jail_jurisdiction.csv")
+Jail_Jurisdiction <- read.csv("https://raw.githubusercontent.com/vera-institute/incarceration-trends/master/incarceration_trends_jail_jurisdiction.csv")
 
 # Calculate at least five summary values from the data --  
 # Summary stats chosen relate to the differences in genders for inmates (ages 15-64) as well as 
@@ -146,8 +144,7 @@ plot(continuous_chart) # Plot continuous_chart
 # data is present/absent
 
 # Load in data for state codes 
-state_codes <- read.csv("https://raw.githubusercontent.com/info201a-w21/a3-maddiewong
-                        /main/state_codes.csv?token=ASLHHCLZ72QZ67HUUNCQG73AHVJPG")
+state_codes <- read.csv("https://raw.githubusercontent.com/info201a-w21/a3-maddiewong/main/state_codes.csv?token=ASLHHCLZ72QZ67HUUNCQG73AHVJPG")
 
 # Mutate incarceration data for map chart using data from 1994-2003 to see changes in 
 # incarceration populations 
@@ -181,7 +178,9 @@ map_chart <- ggplot(data = map_shape) %>%
     color = "blue",
     size = .1
   ) +
-  coord_map() 
+  coord_map() +
+  scale_fill_continuous(low = "aliceblue", high = "navy") +
+  map_theme
 
 plot(map_chart) # Plot map_chart 
 
