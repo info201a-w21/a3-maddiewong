@@ -11,7 +11,7 @@ source("analysis.R")
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Introduction
+## Introduction
 For my analysis of the Incarceration Trends data, I decided to focus on how differences in 
 race and gender in the national incarcerated population were affected by the Violent Crime
 Control and Law Enforcement Act, or the 1994 Crime Bill, which was imposed by the Clinton
@@ -30,7 +30,7 @@ this time period.
 
 \
 
-# Summary Paragraph 
+## Summary Information 
 My summary information consists of the different values between black and white incarcerated 
 individuals. Since I am focusing on the analysis of increases in inmate population totals 
 after the 1994 Crime Bill, I thought it would be interesting to calculate the average amount
@@ -44,11 +44,12 @@ highest number of inmates that existed before 1994 and after 1994 which came out
 these totals which came out to be 1,020,381 people. 
 \
 
-# Trends over time chart 
+## Trends Over Time Chart 
 \
 ```{r time, echo = FALSE}
 trends_chart 
 ```
+
 This chart reflects the changes in the total population of Black inmates after the 1994 Crime Bill
 in California. I decided to include this chart in order to see the changes in the Black inmate
 population after the imposition of certain policies that resulted after the 1994 bill which increased
@@ -57,11 +58,12 @@ that shows the population of Black inmates increasing substantially after 1994 a
 about 1 million people after the bill. 
 \
 
-# Variable comparison chart 
+## Variable Comparison Chart 
 \
 ```{r variable, echo = FALSE}
 continuous_chart
 ```
+
 This chart compares the amount of people of color inmates to white inmates in California prisons after
 1994. While there appears to be more white inmates than POC, the amount of POC inmates to white inmates 
 should be expected to be proportional to the racial demographics of the state. This data shows that the 
@@ -73,7 +75,7 @@ progress, POC appear to make up more than 25% of the total jail population demog
 disparities in incarceration rates for POC vs white inmates. 
 \
 
-# Map 
+## Map 
 \
 #```{r map, echo = FALSE}
 #map_chart 
