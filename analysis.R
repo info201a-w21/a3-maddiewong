@@ -7,6 +7,7 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 library(stringr)
+library(patchwork)
 library(mapproj)
 
 # Load in incarceration_trends.csv & Jail Jurisdiction data 
@@ -24,25 +25,22 @@ Jail_Jurisdiction <- read.csv("https://raw.githubusercontent.com/vera-institute/
 # varying numbers of incarcerated populations to look at the different trends later on 
 # specifically relating to the years after the introduction of the 1994 Crime Bill 
 
-# Function that returns a list of summary information statistics 
-summary_info <- list()
-
 # Calculate the total number of counties in Incarceration_Trends 
-summary_info$num_counties <- Incarceration_Trends %>%
+num_counties <- Incarceration_Trends %>%
   group_by(county_name) %>%
   summarize(num_counties = length(unique(county_name))) %>%
   summarize(num_counties = sum(num_counties)) %>%
   pull(num_counties) 
 
 # What is the average amount of female inmates in 1995?
-summary_info$avg_female_1995 <- Incarceration_Trends %>%
+avg_female_1995 <- Incarceration_Trends %>%
   filter(year == 1995) %>%
   summarize(female_pop_15to64 = sum(female_pop_15to64)) %>%
   summarize(avg_female_1995 = round(female_pop_15to64 / num_counties)) %>%
   pull(avg_female_1995)  
 
 # What is the average amount of male inmates in 1995?
-summary_info$avg_male_1995 <- Incarceration_Trends %>%
+avg_male_1995 <- Incarceration_Trends %>%
   filter(year == 1995) %>%
   summarize(male_pop_15to64 = sum(male_pop_15to64)) %>%
   summarize(avg_male_1995 = round(male_pop_15to64 / num_counties)) %>%
@@ -50,34 +48,34 @@ summary_info$avg_male_1995 <- Incarceration_Trends %>%
 
 # What is the proportion of total inmates from 1993 compared to 1995 after the 1994 Crime Bill?
 # Calculate total inmate population in 1993 
-summary_info$total_1993 <- Incarceration_Trends %>%
+total_1993 <- Incarceration_Trends %>%
   filter(year == 1993) %>%
   summarize(total_pop = sum(total_pop)) %>%
   pull(total_pop)
 
 # Calculate total inmate population in 1995 
-summary_info$total_1995 <- Incarceration_Trends %>%
+total_1995 <- Incarceration_Trends %>%
   filter(year == 1995) %>%
   summarize(total_pop = sum(total_pop)) %>%
   pull(total_pop)
 
 # Calculate proportion of 1993 inmates / 1995 inmates to see the difference after 1994 Crime Bill
-summary_info$prop_1993_1995 <- (total_1993 / total_1995)
+prop_1993_1995 <- (total_1993 / total_1995)
 
 # What was the highest overall incarcerated population before 1994?
-summary_info$highest_pre1994 <- Incarceration_Trends %>%
+highest_pre1994 <- Incarceration_Trends %>%
   filter(year < 1994) %>%
   summarize(total_pop = max(total_pop)) %>%
   pull(total_pop)
 
 # What was the highest overall incarcerated population after 1994? 
-summary_info$highest_post1994 <- Incarceration_Trends %>%
+highest_post1994 <- Incarceration_Trends %>%
   filter(year > 1994) %>%
   summarize(total_pop = max(total_pop)) %>%
   pull(total_pop)
 
 # How much did the highest incarcerated population total change after 1994? 
-summary_info$change_in_total_pop <- (highest_post1994 - highest_pre1994)
+change_in_total_pop <- (highest_post1994 - highest_pre1994)
 
 # Make a chart that shows trends over time for a variable of your choice 
 # Show more than one but fewer than 10 lines. Your graph should compare the trend
@@ -119,10 +117,10 @@ continuous_data <- Incarceration_Trends %>%
   mutate(poc_pop = (black_pop_15to64 + latinx_pop_15to64 + native_pop_15to64)) %>%
   select(year, state, county_name, poc_pop, white_pop_15to64) 
 
-# Aggregate the data for total POC inmate population 
+# Aggregate the data for total POC inmate population per year 
 white_inmate_total <- aggregate(continuous_data['white_pop_15to64'], by = trends_data['year'], sum)
 
-# Aggregate the data for total black inmate population 
+# Aggregate the data for total black POC population per year
 poc_inmate_total <- aggregate(continuous_data['poc_pop'], by = trends_data['year'], sum)
 
 # Join inmate totals 
@@ -164,7 +162,10 @@ map_theme <- theme_bw() +
     axis.text = element_blank(),
     axis.ticks = element_blank(), 
     axis.title = element_blank(),
-    plot.background = element_blank()
+    plot.background = element_blank(),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank()
   )
 
 # Load in shape of states 
@@ -172,17 +173,21 @@ map_shape <- map_data("state") %>%
   left_join(join_map_codes, by = "region")
 
 # Create a blank map of states 
-map_chart <- ggplot(data = map_shape) %>%
-  geom_polygon(
-    mapping = aes(x = long, y = lat, group = group, fill = total_pop_15to64),
-    color = "blue",
-    size = .1
-  ) +
-  coord_map() +
-  scale_fill_continuous(low = "aliceblue", high = "navy") +
-  map_theme
+#map_chart <- ggplot(data = map_shape) +
+#  geom_polygon(
+#    mapping = aes(x = long, y = lat), 
+#    fill = total_pop_15to64,  
+#    color = "blue",
+#    size = .3
+#  ) + 
+#  coord_map() +
+#  scale_fill_continuous(limits = c(0, max(map_shape$total_pop_15to64)), 
+#                        low = "aliceblue", high = "steelblue4"
+##=  ) +
+#  map_theme +
+#  ggtitle("Differences in Jail Populations Across the U.S. (1994-2003)")
 
-plot(map_chart) # Plot map_chart 
+#plot(map_chart) # Plot map_chart 
 
 
 

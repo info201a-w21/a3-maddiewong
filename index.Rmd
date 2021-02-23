@@ -11,7 +11,7 @@ source("analysis.R")
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Introduction & Summary Information 
+# Introduction
 For my analysis of the Incarceration Trends data, I decided to focus on how differences in 
 race and gender in the national incarcerated population were affected by the Violent Crime
 Control and Law Enforcement Act, or the 1994 Crime Bill, which was imposed by the Clinton
@@ -30,11 +30,7 @@ this time period.
 
 \
 
-# Summary information 
-\
-```{r summary, echo = FALSE}
-summary_info
-```
+# Summary Paragraph 
 My summary information consists of the different values between black and white incarcerated 
 individuals. Since I am focusing on the analysis of increases in inmate population totals 
 after the 1994 Crime Bill, I thought it would be interesting to calculate the average amount
@@ -60,6 +56,7 @@ racial discrimination through the War on Drugs and the War on Crime. This chart 
 that shows the population of Black inmates increasing substantially after 1994 as it increases 
 about 1 million people after the bill. 
 \
+
 # Variable comparison chart 
 \
 ```{r variable, echo = FALSE}
@@ -75,6 +72,7 @@ the CA racial demographics because they are not accounted for in the Incarcerati
 progress, POC appear to make up more than 25% of the total jail population demographic demonstrating 
 disparities in incarceration rates for POC vs white inmates. 
 \
+
 # Map 
 \
 #```{r map, echo = FALSE}
