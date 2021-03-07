@@ -181,7 +181,7 @@ map_shape <- map_data("state") %>%
 # Create a blank map of states 
 map_chart <- ggplot(data = map_shape) +
   geom_polygon(
-    mapping = aes(x = long, y = lat, fill = total_pop_15to64), 
+    mapping = aes(x = long, y = lat, group = group, fill = total_pop_15to64), 
     color = "blue",
     size = .3
   ) + 

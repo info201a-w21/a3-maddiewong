@@ -80,6 +80,7 @@ disparities in incarceration rates for POC vs white inmates.
 ```{r map, echo = FALSE}
 map_chart 
 ```
+
 This map shows the differences in the total inmate populations in each state in 1995. I included this chart 
 in order to see the differences in all of the states' incarcerated populations as a result of the 1994 
 Crime Bill in order to see which states had the highest populations as compared to others. I think that
@@ -87,4 +88,8 @@ when you look at the differences in incarcerated populations, it helps to take i
 of the laws that they may have in each state when it comes to laws related to the prohibition of drugs and 
 their history of racial discrimination. Through this chart, you can see the differences in populations as a 
 result of legislation that has occurred both in the states and as a result of the War on Drugs and War on
-Crime. 
+Crime. As you can see, the highest total population in 1995 appears to be in California. This makes sense
+when you think about how policing policies in California tended to be strict during the War on Drugs. Additionally,
+Texas and New York appear to be the second darkest states on the map demonstrating how high incarcerated populations
+tended to be in the highest populated states as well as states with certain policies such as New York's
+Stop-and-Frisk policies and the effects of racial discriminatory laws in the south. 
