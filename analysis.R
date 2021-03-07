@@ -186,9 +186,10 @@ map_chart <- ggplot(data = map_shape) +
     size = .3
   ) + 
   coord_map() +
-  scale_fill_continuous(low = "aliceblue", high = "steelblue4") +
+  scale_fill_continuous(low = "aliceblue", high = "steelblue4") + 
+  labs(fill = "Total Population") +
   map_theme +
-  ggtitle("Differences in Jail Populations Across the U.S. (1995)") 
+  ggtitle("Differences in Jail Populations Across the U.S. in 1995") 
 
 plot(map_chart) # Plot map_chart 
 
