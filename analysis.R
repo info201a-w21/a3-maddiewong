@@ -179,21 +179,18 @@ map_shape <- map_data("state") %>%
   left_join(join_map_codes, by = "region")
 
 # Create a blank map of states 
-#map_chart <- ggplot(data = map_shape) +
-#  geom_polygon(
-#    mapping = aes(x = long, y = lat), 
-#    fill = total_pop_15to64,  
-#    color = "blue",
-#    size = .3
-#  ) + 
-#  coord_map() +
-#  scale_fill_continuous(limits = c(0, max(map_shape$total_pop_15to64)), 
-#                        low = "aliceblue", high = "steelblue4"
-#  ) +
-#  map_theme +
-#  ggtitle("Differences in Jail Populations Across the U.S. (1994-2003)") 
+map_chart <- ggplot(data = map_shape) +
+  geom_polygon(
+    mapping = aes(x = long, y = lat, fill = total_pop_15to64), 
+    color = "blue",
+    size = .3
+  ) + 
+  coord_map() +
+  scale_fill_continuous(low = "aliceblue", high = "steelblue4") +
+  map_theme +
+  ggtitle("Differences in Jail Populations Across the U.S. (1995)") 
 
-#plot(map_chart) # Plot map_chart 
+plot(map_chart) # Plot map_chart 
 
 
 

@@ -77,7 +77,14 @@ disparities in incarceration rates for POC vs white inmates.
 
 ## Map 
 \
-#```{r map, echo = FALSE}
-#map_chart 
-#```
-
+```{r map, echo = FALSE}
+map_chart 
+```
+This map shows the differences in the total inmate populations in each state in 1995. I included this chart 
+in order to see the differences in all of the states' incarcerated populations as a result of the 1994 
+Crime Bill in order to see which states had the highest populations as compared to others. I think that
+when you look at the differences in incarcerated populations, it helps to take into account the specificity 
+of the laws that they may have in each state when it comes to laws related to the prohibition of drugs and 
+their history of racial discrimination. Through this chart, you can see the differences in populations as a 
+result of legislation that has occurred both in the states and as a result of the War on Drugs and War on
+Crime. 
